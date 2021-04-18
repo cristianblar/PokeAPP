@@ -4,7 +4,9 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 
-const { DB_URL } = require('../constants');
+const typeControllers = require('./controllers/Type');
+const pokemonControllers = require('./controllers/Pokemon');
+const { DB_URL } = require('../../constants');
 
 const sequelize = new Sequelize(DB_URL, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -44,7 +46,49 @@ const { Pokemon, Type } = sequelize.models;
 Pokemon.belongsToMany(Type, { through: 'pokemon_types', timestamps: false });
 Type.belongsToMany(Pokemon, { through: 'pokemon_types', timestamps: false });
 
+// Inyectamos los modelos a los controllers para luego exportarlos desde aquí:
+const addTypesToDb = typeControllers.addTypesToDb(Type);
+const getPokemonsOfType = typeControllers.getPokemonsOfType(Type, Pokemon);
+const addPokemonToDb = pokemonControllers.addPokemonToDb(Pokemon);
+const getAllPokemonsFromDb = pokemonControllers.getAllPokemonsFromDb(
+  Pokemon,
+  Type
+);
+const getPokemonByIdFromDb = pokemonControllers.getPokemonByIdFromDb(
+  Pokemon,
+  Type
+);
+const getPokemonByNameFromDb = pokemonControllers.getPokemonByNameFromDb(
+  Pokemon,
+  Type
+);
+const toggleCaughtStatusInDb = pokemonControllers.toggleCaughtStatusInDb(
+  Pokemon
+);
+const getAllCaughtPokemonsFromDb = pokemonControllers.getAllCaughtPokemonsFromDb(
+  Pokemon,
+  Type
+);
+const deletePokemonFromDb = pokemonControllers.deletePokemonFromDb(Pokemon);
+const deleteAllPokemonsFromDb = pokemonControllers.deleteAllPokemonsFromDb(
+  Pokemon
+);
+
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  // Type controllers:
+  addTypesToDb,
+  getAllTypesFromDb: typeControllers.getAllTypesFromDb,
+  getPokemonsOfType,
+  addPokemonToDb,
+  getAllPokemonsFromDb,
+  getPokemonByIdFromDb,
+  getPokemonByNameFromDb,
+  assignTypeToPokemon: typeControllers.assignTypeToPokemon,
+  assignTypesToPokemon: typeControllers.assignTypesToPokemon,
+  getAllCaughtPokemonsFromDb,
+  toggleCaughtStatusInDb,
+  deletePokemonFromDb,
+  deleteAllPokemonsFromDb,
 };

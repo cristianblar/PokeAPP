@@ -18,8 +18,9 @@ module.exports = (sequelize) => {
       },
       image_url: {
         type: DataTypes.STRING,
-        defaultValue:
-          'https://res.cloudinary.com/cristianblar/image/upload/v1618532872/new-pokemon.jpg',
+      },
+      caught: {
+        type: DataTypes.BOOLEAN,
       },
       experience: {
         type: DataTypes.INTEGER,

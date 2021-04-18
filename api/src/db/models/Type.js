@@ -5,7 +5,16 @@ module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
     'type',
-    { name: DataTypes.STRING },
+    {
+      id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+      },
+      name: {
+        type: DataTypes.STRING,
+      },
+    },
     { tableName: 'types', timestamps: false }
   );
 };
