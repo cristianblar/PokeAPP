@@ -41,54 +41,36 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Para relacionarlos hacemos un destructuring
 const { Pokemon, Type } = sequelize.models;
 
-// Aca vendrian las relaciones
-// Product.hasMany(Reviews);
+/* * RELACIONES * */
 Pokemon.belongsToMany(Type, { through: 'pokemon_types', timestamps: false });
 Type.belongsToMany(Pokemon, { through: 'pokemon_types', timestamps: false });
 
-// Inyectamos los modelos a los controllers para luego exportarlos desde aquí:
-const addTypesToDb = typeControllers.addTypesToDb(Type);
-const getPokemonsOfType = typeControllers.getPokemonsOfType(Type, Pokemon);
-const addPokemonToDb = pokemonControllers.addPokemonToDb(Pokemon);
-const getAllPokemonsFromDb = pokemonControllers.getAllPokemonsFromDb(
-  Pokemon,
-  Type
-);
-const getPokemonByIdFromDb = pokemonControllers.getPokemonByIdFromDb(
-  Pokemon,
-  Type
-);
-const getPokemonByNameFromDb = pokemonControllers.getPokemonByNameFromDb(
-  Pokemon,
-  Type
-);
-const toggleCaughtStatusInDb = pokemonControllers.toggleCaughtStatusInDb(
-  Pokemon
-);
-const getAllCaughtPokemonsFromDb = pokemonControllers.getAllCaughtPokemonsFromDb(
-  Pokemon,
-  Type
-);
-const deletePokemonFromDb = pokemonControllers.deletePokemonFromDb(Pokemon);
-const deleteAllPokemonsFromDb = pokemonControllers.deleteAllPokemonsFromDb(
-  Pokemon
-);
-
+// Inyectamos los modelos a los controllers para luego exportar todo desde el index:
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
-  conn: sequelize, // para importart la conexión { conn } = require('./db.js');
+  ...sequelize.models, // para poder importar los modelos así: const { Pokemon, Type } = require('./index.js');
+  conn: sequelize, // para importar la conexión { conn } = require('./index.js');
   // Type controllers:
-  addTypesToDb,
+  addTypesToDb: typeControllers.addTypesToDb(Type),
   getAllTypesFromDb: typeControllers.getAllTypesFromDb,
-  getPokemonsOfType,
-  addPokemonToDb,
-  getAllPokemonsFromDb,
-  getPokemonByIdFromDb,
-  getPokemonByNameFromDb,
-  assignTypeToPokemon: typeControllers.assignTypeToPokemon,
-  assignTypesToPokemon: typeControllers.assignTypesToPokemon,
-  getAllCaughtPokemonsFromDb,
-  toggleCaughtStatusInDb,
-  deletePokemonFromDb,
-  deleteAllPokemonsFromDb,
+  getPokemonsOfTypeFromDb: typeControllers.getPokemonsOfTypeFromDb(
+    Type,
+    Pokemon
+  ),
+  // Pokemon controllers:
+  addPokemonToDb: pokemonControllers.addPokemonToDb(Pokemon),
+  assignTypeToPokemonInDb: typeControllers.assignTypeToPokemonInDb,
+  assignTypesToPokemonInDb: typeControllers.assignTypesToPokemonInDb,
+  getAllPokemonsFromDb: pokemonControllers.getAllPokemonsFromDb(Pokemon, Type),
+  getPokemonByIdFromDb: pokemonControllers.getPokemonByIdFromDb(Pokemon, Type),
+  getPokemonByNameFromDb: pokemonControllers.getPokemonByNameFromDb(
+    Pokemon,
+    Type
+  ),
+  toggleCaughtStatusInDb: pokemonControllers.toggleCaughtStatusInDb(Pokemon),
+  getAllCaughtPokemonsFromDb: pokemonControllers.getAllCaughtPokemonsFromDb(
+    Pokemon,
+    Type
+  ),
+  deletePokemonFromDb: pokemonControllers.deletePokemonFromDb(Pokemon),
+  deleteAllPokemonsFromDb: pokemonControllers.deleteAllPokemonsFromDb(Pokemon),
 };

@@ -1,26 +1,12 @@
 /* eslint-disable no-restricted-syntax */
 
-const { NEW_IMG_URL } = require('../../../constants');
-
 module.exports = {
-  // Requiere validación en el backend
   addPokemonToDb: (model) => async (pokemon) => {
     try {
-      const createdPokemon = await model.create({
-        name: pokemon.name.toLowerCase(),
-        image_url: pokemon.image_url || NEW_IMG_URL,
-        caught: pokemon.caught || true,
-        experience: pokemon.experience || null,
-        health: pokemon.health || null,
-        attack: pokemon.attack || null,
-        defense: pokemon.defense || null,
-        speed: pokemon.speed || null,
-        height: pokemon.height || null,
-        weight: pokemon.weight || null,
-      });
+      const createdPokemon = await model.create(pokemon);
       return createdPokemon;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   getPokemonByIdFromDb: (pokemonModel, typeModel) => async (pokemonId) => {
@@ -31,23 +17,23 @@ module.exports = {
           through: { attributes: [] },
         },
       });
-      return foundPokemon ? JSON.stringify(foundPokemon) : null;
+      return foundPokemon;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   getPokemonByNameFromDb: (pokemonModel, typeModel) => async (pokemonName) => {
     try {
       const foundPokemon = await pokemonModel.findOne({
-        where: { name: pokemonName.toLowerCase() },
+        where: { name: pokemonName },
         include: {
           model: typeModel,
           through: { attributes: [] },
         },
       });
-      return foundPokemon ? JSON.stringify(foundPokemon) : null;
+      return foundPokemon;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   getAllPokemonsFromDb: (pokemonModel, typeModel) => async () => {
@@ -58,23 +44,27 @@ module.exports = {
           through: { attributes: [] },
         },
       });
-      return foundPokemons.length ? JSON.stringify(foundPokemons) : null;
+      return foundPokemons;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   toggleCaughtStatusInDb: (model) => async (pokemonId) => {
-    const target = await model.findByPk(pokemonId);
-    if (!target) return null;
-    const currentStatus = target.getDataValue('caught');
-    if (currentStatus) {
-      target.caught = false;
+    try {
+      const target = await model.findByPk(pokemonId);
+      if (!target) return null;
+      const currentStatus = target.getDataValue('caught');
+      if (currentStatus) {
+        target.caught = false;
+        await target.save();
+        return true;
+      }
+      target.caught = true;
       await target.save();
-      return 'Pokemon has been set free!';
+      return true;
+    } catch (error) {
+      return Promise.reject(error);
     }
-    target.caught = true;
-    await target.save();
-    return 'Pokemon caught!';
   },
   getAllCaughtPokemonsFromDb: (pokemonModel, typeModel) => async () => {
     try {
@@ -85,9 +75,9 @@ module.exports = {
           through: { attributes: [] },
         },
       });
-      return foundPokemons.length ? JSON.stringify(foundPokemons) : null;
+      return foundPokemons;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   deletePokemonFromDb: (model) => async (pokemonId) => {
@@ -95,12 +85,14 @@ module.exports = {
       const foundPokemon = await model.findByPk(pokemonId);
       return foundPokemon ? await foundPokemon.destroy() : null;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   deleteAllPokemonsFromDb: (model) => async () => {
     try {
-      const foundPokemons = await model.findAll();
+      const foundPokemons = await model.findAll({
+        where: { realId: null },
+      });
       if (!foundPokemons.length) return null;
       const destroyPromises = [];
       // eslint-disable-next-line prefer-const
@@ -108,9 +100,9 @@ module.exports = {
         destroyPromises.push(pokemon.destroy());
       }
       await Promise.all(destroyPromises);
-      return 'All Pokemons deleted!';
+      return true;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
 };

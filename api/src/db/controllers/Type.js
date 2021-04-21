@@ -1,4 +1,6 @@
+const { Op } = require('sequelize');
 const fetch = require('node-fetch');
+
 const { API_URL } = require('../../../constants');
 
 let typeInstances = [];
@@ -20,49 +22,64 @@ module.exports = {
       typeInstances = await model.bulkCreate(typeRows, { validate: true });
       return 'All the types have been added from the PokeAPI';
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
-  getAllTypesFromDb: () => JSON.stringify(typeInstances),
-  assignTypeToPokemon: async (pokemonInstance, pokemonType) => {
+  getAllTypesFromDb: () => typeInstances,
+  assignTypeToPokemonInDb: async (pokemonInstance, pokemonType) => {
     try {
       const pokemonTypeInstance = typeInstances.filter(
-        (typeInstance) =>
-          typeInstance.dataValues.name === pokemonType.toLowerCase()
+        (typeInstance) => typeInstance.dataValues.name === pokemonType
       )[0];
       await pokemonInstance.addType(pokemonTypeInstance);
-      return 'Relation has been made!';
+      return true;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
   // pokemonTypes must be an array of strings:
-  assignTypesToPokemon: async (pokemonInstance, pokemonTypes) => {
+  assignTypesToPokemonInDb: async (pokemonInstance, pokemonTypes) => {
     try {
-      const normalizedPokemonTypes = pokemonTypes.map((pokemonType) =>
-        pokemonType.toLowerCase()
-      );
       const pokemonTypesInstances = typeInstances.filter((typeInstance) =>
-        normalizedPokemonTypes.includes(typeInstance.dataValues.name)
+        pokemonTypes.includes(typeInstance.dataValues.name)
       );
       await pokemonInstance.addTypes(pokemonTypesInstances);
-      return 'Relations added!';
+      return true;
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
-  getPokemonsOfType: (typeModel, pokemonModel) => async (typeName) => {
+  getPokemonsOfTypeFromDb: (typeModel, pokemonModel) => async (typeName) => {
     try {
-      const foundType = await typeModel.findOne({
-        where: { name: typeName.toLowerCase() },
+      const foundType = typeInstances.filter(
+        (typeInstance) => typeInstance.dataValues.name === typeName
+      )[0];
+      if (!foundType) return null;
+      const foundPokemons = await pokemonModel.findAll({
         include: {
-          model: pokemonModel,
+          model: typeModel,
+          where: { name: foundType.getDataValue('name') },
           through: { attributes: [] },
         },
       });
-      return foundType ? JSON.stringify(foundType) : null;
+      /* La query anterior traerá todos los pokemones del type
+        pero si el pokemon tiene más de 1 tipo, solo mostrará
+        el type buscado. Se debe hacer una query adicional
+        para traer los types de cada pokemon completos... */
+      const foundPokemonsIds = foundPokemons.map((foundPokemon) =>
+        foundPokemon.getDataValue('id')
+      );
+      const fixedFoundPokemons = await pokemonModel.findAll({
+        where: { id: { [Op.in]: foundPokemonsIds } },
+        include: {
+          model: typeModel,
+          through: { attributes: [] },
+        },
+      });
+      // Se retorna el id para ser utilizado luego al consultar la API
+      return { data: fixedFoundPokemons, id: foundType.getDataValue('id') };
     } catch (error) {
-      return new Error(error.message);
+      return Promise.reject(error);
     }
   },
 };

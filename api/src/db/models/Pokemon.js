@@ -8,8 +8,12 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        defaultValue: Sequelize.UUIDV4, // Nunca será igual a los id de la API
         primaryKey: true,
+      },
+      // Para la referencia de API Pokemons "ATRAPADOS":
+      realId: {
+        type: DataTypes.INTEGER,
       },
       name: {
         type: DataTypes.STRING,
@@ -19,9 +23,11 @@ module.exports = (sequelize) => {
       image_url: {
         type: DataTypes.STRING,
       },
+      // Para filtrado de pokemones "ATRAPADOS":
       caught: {
         type: DataTypes.BOOLEAN,
       },
+      // Los puntos de experiencia son importantes para un entrenador Pokemon
       experience: {
         type: DataTypes.INTEGER,
       },
