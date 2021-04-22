@@ -20,7 +20,7 @@ router
     responseManager(catchAPIPokemon, res, 201, [req.body.id]);
   })
   .patch((req, res) => {
-    // { id: xxxx }  =>  Solo se usa para created pokemons
+    // { id: xxxx }  =>  Solo se usa para created pokemons... Los atrapa o libera
     responseManager(toggleCaughtPokemon, res, 200, [req.body.id]);
   })
   .delete((req, res) => {

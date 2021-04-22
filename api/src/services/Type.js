@@ -4,7 +4,7 @@ const { API_URL } = require('../../constants');
 const { getAllTypesFromDb, getPokemonsOfTypeFromDb } = require('../db/index');
 
 module.exports = {
-  getAllTypes: () => JSON.stringify(getAllTypesFromDb()),
+  getAllTypes: () => getAllTypesFromDb(),
   getPokemonsOfType: async (typeName) => {
     try {
       if (typeof typeName !== 'string') throw new TypeError('Invalid type');
@@ -38,7 +38,7 @@ module.exports = {
               ? pokemonDetail.types.map((typeObject) => typeObject.name)
               : pokemonDetail.types.map((type) => type.type.name),
         }));
-      if (fullPokemonsList.length) return fullPokemonsList;
+      if (fullPokemonsList.length) return { results: fullPokemonsList };
       return `Type doesn't have pokemons registered`;
     } catch (error) {
       return Promise.reject(error);

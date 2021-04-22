@@ -6,8 +6,7 @@ const responseManager = require('./Response');
 const router = Router();
 
 router.route('/').get((req, res) => {
-  const result = getAllTypes();
-  res.status(200).send(result);
+  res.status(200).json({ results: getAllTypes() });
 });
 
 router.route('/:typeName').get((req, res) => {

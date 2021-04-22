@@ -52,7 +52,7 @@ module.exports = {
               : pokemonDetail.types.map((type) => type.type.name),
         }));
       // If <all> query, NO paginar y devolver TODO:
-      if (all) return fullPokemonsList;
+      if (all) return { results: fullPokemonsList };
       // Si no... PAGINACIÓN desde el BACKEND:
       const basicPagesInfo = {
         totalPokemonCount: fullPokemonsList.length,
@@ -150,7 +150,7 @@ module.exports = {
       const pokemonInstance = await addPokemonToDb(pokemonInfo);
       // Asignación de types a través de la relación:
       // Si no se proveen types, se asigna 'unknown'...
-      if (!types.length)
+      if ((types && !types.length) || !types)
         await assignTypeToPokemonInDb(pokemonInstance, 'unknown');
       else if (types.length === 1)
         await assignTypeToPokemonInDb(
@@ -330,7 +330,7 @@ module.exports = {
         image_url: pokemon.image_url,
         types: pokemon.types.map((typeObject) => typeObject.name),
       }));
-      return fullCaughtPokemonsList;
+      return { results: fullCaughtPokemonsList };
     } catch (error) {
       return Promise.reject(error);
     }
