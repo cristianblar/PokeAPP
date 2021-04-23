@@ -1,3 +1,5 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /package.json
+Disallow: /src/App.test.js
+Disallow: /src/setupTests.js
