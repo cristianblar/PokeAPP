@@ -1,0 +1,24 @@
+.landingBackground
+  background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619137421/Landing/Pokeball-landing_irqvqs-conv_wycnag.webp')
+  background-size: cover
+  background-position: center
+  height: 100vh
+  position: relative
+  width: 100vw
+
+.landingLogo
+  bottom: 24px
+  left: calc( 50% - 125px )
+  position: absolute
+  transition: 2s
+  &:hover
+    transform: scale(1.2)
+
+@media screen and ( min-width: 970px )
+  .landingLogo
+    bottom: 50px
+    left: unset
+    right: 50px
+    height: 154px
+    width: 300px
+  

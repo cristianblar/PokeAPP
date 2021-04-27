@@ -1,0 +1,86 @@
+@import ../../../App
+
+footer
+  @include h2-font-config
+  background-color: $main-blue
+  color: $main-yellow
+  font-size: 1.6rem
+  padding-top: 24px
+  text-align: center
+  width: 100%
+  h4
+    margin-bottom: 24px
+
+.socialMediaContainer
+  display: flex
+  justify-content: space-evenly
+  margin-bottom: 12px
+  .facebook
+    @include social-media-config('https://res.cloudinary.com/cristianblar/image/upload/v1619298978/Icons/045-facebook_z20ww3.svg')
+  .youtube
+    @include social-media-config('https://res.cloudinary.com/cristianblar/image/upload/v1619298978/Icons/002-youtube_uda9ed.svg')
+  .twitter
+    @include social-media-config('https://res.cloudinary.com/cristianblar/image/upload/v1619298978/Icons/014-twitter_tk55zz.svg')
+  .instagram
+    @include social-media-config('https://res.cloudinary.com/cristianblar/image/upload/v1619298978/Icons/034-instagram_i0jibb.svg')
+
+.pikachuPicture
+  margin-bottom: 12px
+
+.legalInfo
+  @include h2-font-config
+  border: none
+  background: none
+  color: $main-yellow
+  cursor: pointer
+  display: block
+  font-size: 1.6rem
+  margin: 0 auto 24px
+  &:hover
+    font-weight: bold
+    text-decoration: underline
+
+.authorInfo
+  padding-bottom: 12px
+  font-size: 2rem
+  .henryLogo
+    display: inline-block
+    width: 40px
+    height: 30px
+    background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619301859/Icons/HenryLogo_j1jhle.webp')
+    background-position: center
+    background-size: cover
+  span
+    vertical-align: middle
+    strong
+      a
+        color: $light-yellow
+        text-decoration: none
+        &:hover
+          text-decoration: underline
+
+@media screen and ( min-width: 768px )
+  footer
+    padding: 18px 24px 0px
+    position: relative
+  .mainContainer
+    display: flex
+    align-items: center
+    justify-content: space-between
+    h4
+      width: 175px
+    .socialMediaContainer
+      justify-content: start
+      span
+        height: 40px
+        width: 40px
+        margin: 0 4px
+    .pikachuPicture
+      position: absolute
+      top: 4px
+      left: calc( 50% - 62.5px )
+      width: 125px
+      height: 137px
+  
+  .authorInfo
+    padding-top: 12px

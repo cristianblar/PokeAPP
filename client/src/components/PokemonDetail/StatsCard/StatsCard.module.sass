@@ -1,0 +1,46 @@
+@import ../../../App
+
+.mainContainer
+  font-weight: $pokemon-details-font-weight
+  font-size: 1.8rem
+  margin: 18px 0px
+  text-align: left
+  width: 100%
+  ul
+    @include reset-list
+    background: rgb(2,0,36)
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(0,58,112,1) 20%, rgba(0,212,255,1) 100%)
+    border-radius: 20px
+    box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.2)
+    color: $custom-white
+    padding: 18px
+    margin: 0 auto
+    width: 90%
+    li
+      margin-bottom: 4px
+
+.experienceIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442327/Icons/experience_sfbxtl.svg')
+
+.healthIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442327/Icons/health_nh1prt.svg')
+
+.attackIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442327/Icons/attack_pcljme.svg')
+  
+.defenseIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442327/Icons/defense_iodbxc.svg')
+
+.speedIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442329/Icons/speed_dzst7v.svg')
+
+@media screen and ( min-width: 400px )
+  .mainContainer
+    ul
+      padding-left: 36px
+
+@media screen and ( min-width: 600px )
+  .mainContainer
+    width: 50%
+    max-width: 400px
+  

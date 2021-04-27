@@ -1,0 +1,38 @@
+@import ../../App
+
+.mainContainer
+  position: relative
+  text-align: center
+
+.mainContainer > div > h2
+  font-family: $titles-font-family
+  font-weight: $h1-font-weight
+  font-size: 3rem
+  margin-top: 24px
+  margin-bottom: 12px
+
+.catchButton
+  position: absolute
+  right: 36px
+  top: calc( 50% - 36px )
+  border: none
+  border-radius: 50%
+  background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619139667/CatchPokemon/pokeball_catchpokemon_pxzi2y.png')
+  background-position: center
+  background-size: contain
+  cursor: pointer
+  width: 24px
+  height: 24px
+
+@media screen and ( min-width: 600px )
+  .mainContainer
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+    justify-content: space-evenly
+  
+  .catchButton
+    left: calc( 10% - 12px )
+    top: calc( 65% - 12px )
+
+  

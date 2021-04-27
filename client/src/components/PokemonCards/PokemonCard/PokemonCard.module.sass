@@ -1,0 +1,23 @@
+@import ../../../App
+
+.cardContainer
+  background-color: $custom-black
+  border: none
+  border-radius: 16px
+  box-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.2)
+  color: $custom-white
+  height: 200px
+  margin-bottom: 24px
+  padding: 12px
+  text-align: center
+  transition: 500ms
+  width: 150px
+  h4
+    font-weight: $pokemonslist-title-font-weight
+    font-size: 1.8rem
+    margin-bottom: 8px
+  ul
+    @include reset-list
+    margin-top: 12px
+    font-weight: $pokemonslist-details-font-weight
+    font-size: 1.4rem

@@ -1,0 +1,63 @@
+@import ../../App
+
+.mainContainer
+  font-size: 1.6rem
+  text-align: center
+  max-width: 600px
+  margin: 24px auto 0
+  width: 100%
+  span
+    display: block
+    margin-bottom: 8px
+  input[type=text], input[type=number]
+    font-family: $buttons-font-family
+    font-weight: $buttons-font-weight
+    font-size: 2.4rem
+    letter-spacing: 0.6rem
+    margin-bottom: 24px
+    height: 40px
+    max-width: 400px
+    width: 80%
+    background-color: lighten($light-blue, 20)
+    border: none
+    border-radius: 24px
+    color: $main-yellow
+    display: inline-block
+    line-height: 40px
+    padding: 0 18px
+    &:focus
+      outline: none
+      box-shadow: 0px 4px 8px rgba(30, 36, 89, 0.2)
+
+.labelsContainer
+  margin-top: 24px
+  display: grid
+  grid-template-columns: 1fr 1fr
+  img
+    display: block
+    margin: 0 auto
+  label
+    margin-bottom: 12px
+
+.addButton
+  background-color: $main-blue
+  color: $main-yellow
+  border: 2px solid $main-yellow
+  border-radius: 24px
+  display: block
+  margin: 80px auto
+  font-family: $buttons-font-family
+  font-weight: $buttons-font-weight
+  font-size: 4.8rem
+  cursor: pointer
+  height: 80px
+  width: 180px
+  &:hover
+    background-color: $main-yellow
+    border: 2px solid $main-blue
+    color: $main-blue
+
+@media screen and ( min-width: 600px )
+  .labelsContainer
+    grid-template-columns: 1fr 1fr 1fr
+  

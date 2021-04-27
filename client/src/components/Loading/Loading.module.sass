@@ -1,0 +1,29 @@
+.mainContainer
+  z-index: 1
+  background-color: #222224f3
+  height: 100vh
+  width: 100vw
+  padding: 0px
+  position: fixed
+  text-align: center
+  top: 0
+
+@keyframes infiniteRotation
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.rotating
+  outline-color: red
+  position: absolute
+  top: calc( 50% - 50px )
+  left: calc( 50% - 50px )
+  z-index: 10
+  margin: 0 auto
+  width: 100px
+  height: 100px
+  background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619138388/Icons/loading_pokeball_ydwfdq.png')
+  background-position: center
+  background-size: contain
+  animation: infiniteRotation 2s linear infinite

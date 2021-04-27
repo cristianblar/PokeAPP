@@ -1,0 +1,76 @@
+/* FONTS IMPORT */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto+Mono:wght@100;300&family=VT323&display=swap')
+
+// font-family: 'Lato', sans-serif;
+// font-family: 'Roboto Mono', monospace;
+// font-family: 'VT323', monospace;
+
+
+/* VARIABLES */
+
+// Typography
+$titles-font-family: 'Lato', sans-serif
+$body-font-family: 'Roboto Mono', monospace
+$buttons-font-family: 'VT323', monospace
+$h1-font-weight: 700
+$h2-font-weight: 400
+$pokemonslist-title-font-weight: 300
+$pokemonslist-details-font-weight: 100
+$pokemon-details-font-weight: 300
+$buttons-font-weight: 400
+
+// Colors
+$custom-black: #222224
+$custom-white: #F0F0F0
+
+$red-pokeball: #F00000
+$light-red-pokeball: #EE1515
+
+$main-blue: #003A70
+$light-blue: #0061BD
+
+$main-yellow: #FFCB05
+$light-yellow: #FFD21F
+
+/* MIXINS */
+@mixin reset-list
+  margin: 0
+  padding: 0
+  list-style: none
+
+@mixin h1-font-config
+  font-family: $titles-font-family
+  font-weight: $h1-font-weight
+
+@mixin h2-font-config
+  font-family: $titles-font-family
+  font-weight: $h2-font-weight
+
+@mixin list-title-config
+  font-family: $titles-font-family
+  font-weight: $pokemonslist-title-font-weight
+
+@mixin button-config
+  font-family: $buttons-font-family
+  font-weight: $buttons-font-weight
+
+@mixin social-media-config($background-url)
+    background-image: url($background-url)
+    background-position: center
+    background-size: contain
+    display: inline-block
+    height: 50px
+    width: 50px
+
+@mixin stats-icons-config($background-url)
+    background-image: url($background-url)
+    background-position: center
+    background-size: contain
+    display: inline-block
+    height: 20px
+    width: 20px
+
+// Global Font Family assignation for body
+body
+  font-family: $body-font-family
+  background-color: $custom-white

@@ -6,6 +6,8 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.1",
     "@testing-library/user-event": "^12.2.2",
+    "node-sass": "^4.0.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.3",
@@ -14,6 +16,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
+    "sweetalert": "^2.1.2",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -35,6 +38,8 @@
     ]
   },
   "devDependencies": {
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.1",
+    "enzyme": "^3.11.0",
     "eslint": "^7.24.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.2.0",

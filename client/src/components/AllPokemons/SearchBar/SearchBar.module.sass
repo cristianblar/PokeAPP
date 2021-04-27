@@ -1,0 +1,41 @@
+@import ../../../App
+
+.mainContainer
+  margin: 0 auto 18px
+  margin-bottom: 18px
+  text-align: center
+  max-width: 700px
+  width: 100%
+
+.searchInput
+  background-color: lighten($light-yellow, 10)
+  border: none
+  border-radius: 24px
+  color: $custom-black
+  display: inline-block
+  font-family: $body-font-family
+  font-weight: $pokemon-details-font-weight
+  font-size: 2rem
+  line-height: 40px
+  height: 40px
+  margin-right: 12px
+  padding: 0 12px
+  vertical-align: middle
+  width: 80%
+  &:focus
+    outline: none
+    box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16)
+
+.searchButton
+  display: inline-block
+  background-color: $custom-white
+  background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619303142/Icons/searchButton_kjbkpz.svg')
+  background-position: center
+  background-size: contain
+  cursor: pointer
+  border: none
+  height: 40px
+  vertical-align: middle
+  width: 40px
+  &:hover
+    background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619502765/Icons/search2_p0jtsp.svg')

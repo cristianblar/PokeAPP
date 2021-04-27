@@ -1,0 +1,43 @@
+@import ../../../App
+
+.mainContainer
+  background: rgb(2,0,36)
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(34,34,36,1) 40%, rgba(0,212,255,1) 100%)
+  border-radius: 20px
+  color: $custom-white
+  display: flex
+  justify-content: space-between
+  align-items: center
+  font-weight: $pokemon-details-font-weight
+  font-size: 1.4rem
+  margin: 18px auto 0px
+  padding: 18px
+  width: 90%
+  ul
+    @include reset-list
+    li
+      margin-bottom: 8px
+
+.heightIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442327/Icons/height_kvorgz.svg')
+  display: none
+
+.weightIcon
+  @include stats-icons-config('https://res.cloudinary.com/cristianblar/image/upload/v1619442327/Icons/weight_bxzucz.svg')
+  display: none
+
+@media screen and ( min-width: 400px )
+  .heightIcon
+    display: inline-block
+  
+  .weightIcon
+    display: inline-block
+
+@media screen and ( min-width: 600px )
+  .mainContainer
+    max-width: 800px
+    justify-content: space-around
+    font-size: 1.8rem
+    ul
+      li
+        margin-bottom: 24px

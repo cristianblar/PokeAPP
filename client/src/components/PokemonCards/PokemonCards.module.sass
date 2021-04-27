@@ -1,0 +1,45 @@
+@import ../../App
+
+.mainContainer
+  width: 100%
+
+.mainContainer > ul
+  @include reset-list
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  margin: 0 auto
+  width: 90%
+
+.mainContainer > ul > li
+  margin-right: 36px
+  position: relative
+  transition: 500ms
+  &:hover
+    transform: scale(1.2)
+
+.deleteButton
+  position: absolute
+  top: 10px
+  right: 10px
+  border: none
+  border-radius: 50%
+  background-color: $red-pokeball
+  color: $custom-white
+  font-weight: bold
+  cursor: pointer
+  width: 24px
+  height: 24px
+
+.uncatchButton
+  position: absolute
+  bottom: 34px
+  right: 10px
+  border: none
+  border-radius: 50%
+  background-image: url('https://res.cloudinary.com/cristianblar/image/upload/v1619139738/CatchPokemon/openpokeball_liberate_sgyh9a.png')
+  background-position: center
+  background-size: contain
+  cursor: pointer
+  width: 24px
+  height: 24px
