@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 
 import swal from 'sweetalert';
 
+import styles from './AllPokemons.module.sass';
+
 import LoadingScreen from '../Loading/Loading';
 
 import { API_URL } from '../../constants';
@@ -176,13 +178,17 @@ function AllPokemons({
       <Layout>
         <SearchBar onSearch={onSearch} />
         <TypeFilter currentFilters={filters} handleFilter={handleFilter} />
-        <img
-          src="https://res.cloudinary.com/cristianblar/image/upload/v1619440623/sadPikachu_noDetail_vtsf0k.png"
-          alt="Sad pikachu"
-          width="195"
-          height="176"
-        />
-        <h4>No Pokémon found with the applied filter 😢</h4>
+        <figure className={styles.imageContainer}>
+          <img
+            src="https://res.cloudinary.com/cristianblar/image/upload/v1619440623/sadPikachu_noDetail_vtsf0k.png"
+            alt="Sad pikachu"
+            width="195"
+            height="176"
+          />
+        </figure>
+        <h4 className={styles.emptyTitle}>
+          No Pokémon found with the applied filter 😢
+        </h4>
       </Layout>
     );
 

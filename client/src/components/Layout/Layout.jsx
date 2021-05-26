@@ -8,11 +8,11 @@ import Footer from './Footer/Footer';
 
 function Layout({ children: content }) {
   return (
-    <>
+    <div className={styles.pageContainer}>
       <Header />
       <div className={styles.wrapper}>{content}</div>
       <Footer />
-    </>
+    </div>
   );
 }
 

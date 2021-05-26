@@ -4,8 +4,11 @@ footer
   @include h2-font-config
   background-color: $main-blue
   color: $main-yellow
+  height: 411px
   font-size: 1.6rem
   padding-top: 24px
+  position: absolute
+  bottom: 0
   text-align: center
   width: 100%
   h4
@@ -61,8 +64,10 @@ footer
 
 @media screen and ( min-width: 768px )
   footer
+    height: 189px
     padding: 18px 24px 0px
-    position: relative
+    position: absolute
+    bottom: 0
   .mainContainer
     display: flex
     align-items: center

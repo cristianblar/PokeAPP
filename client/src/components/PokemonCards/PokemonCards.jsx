@@ -62,8 +62,7 @@ function PokemonCards({ currentPokemons }) {
       };
       swal({
         title: 'Do you want to set your Pokémon free?',
-        text:
-          'This action will liberate your created Pokémon and you will have to catch him again (the Pokémon will not be erased from the existing Pokémon list)',
+        text: 'This action will liberate your created Pokémon and you will have to catch him again (the Pokémon will not be erased from the existing Pokémon list)',
         icon: 'warning',
         buttons: true,
         dangerMode: true,
@@ -97,8 +96,7 @@ function PokemonCards({ currentPokemons }) {
       };
       swal({
         title: 'Do you want to set this Pokémon free?',
-        text:
-          'This action will liberate the Pokémon and you will have to catch him again',
+        text: 'This action will liberate the Pokémon and you will have to catch him again',
         icon: 'warning',
         buttons: true,
         dangerMode: true,
