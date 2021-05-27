@@ -1,26 +1,12 @@
 const { Op } = require('sequelize');
-const fetch = require('node-fetch');
-
-const { API_URL } = require('../../../constants');
 
 let typeInstances = [];
 
 module.exports = {
   addTypesToDb: (model) => async () => {
     try {
-      // Traemos de la PokeApi la lista de types
-      const typesResponse = await fetch(`${API_URL}/type`);
-      const typesJson = await typesResponse.json();
-      const typesArray = await typesJson.results;
-
-      // Modificamos la respuesta y la dejamos lista para Bulk Creation:
-      const typeRows = typesArray.map((type) => ({
-        id: parseInt(type.url.split('/')[6], 10),
-        name: type.name,
-      }));
-      // Inyectamos la data de los types a la base de datos:
-      typeInstances = await model.bulkCreate(typeRows, { validate: true });
-      return 'All the types have been added from the PokeAPI';
+      typeInstances = await model.findAll();
+      return 'All the types have been synced';
     } catch (error) {
       return Promise.reject(error);
     }
