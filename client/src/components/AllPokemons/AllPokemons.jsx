@@ -208,7 +208,11 @@ function AllPokemons({
             changePage={changePageWithFrontPagination}
           />
           {filters.origin === 'created' ? (
-            <button type="button" onClick={deleteAll}>
+            <button
+              className={styles.deleteButton}
+              type="button"
+              onClick={deleteAll}
+            >
               Delete all created Pokémon
             </button>
           ) : (
